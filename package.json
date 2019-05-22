@@ -84,7 +84,7 @@
       "!src/**/*.d.ts"
     ],
     "setupFiles": [
-      "react-app-polyfill/jsdom"
+      "./test-setup.js"
     ],
     "setupFilesAfterEnv": [],
     "testMatch": [
@@ -121,6 +121,10 @@
     "watchPlugins": [
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
+    ],
+    "verbose": true,
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests/index.spec.js"
     ]
   },
   "babel": {
@@ -132,6 +136,10 @@
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/plugin-transform-react-jsx-self": "^7.2.0",
     "axios": "^0.18.0",
+    "chai": "^4.2.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-15": "^1.4.0",
+    "enzyme-adapter-react-16": "^1.13.1",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "react-places-autocomplete": "^7.2.1",
