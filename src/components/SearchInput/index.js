@@ -3,6 +3,7 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
 } from 'react-places-autocomplete';
+import { connect } from "react-redux";
 
 import './styles.scss';
 
@@ -25,11 +26,14 @@ class SearchInput extends React.Component {
     handleSelect = address => {
         geocodeByAddress(address)
             .then(results => getLatLng(results[0]))
-            .then(latLng => console.log('Success', latLng))
+            .then(latLng => {
+                this.props.updateCoordinates(latLng)
+            })
             .catch(error => console.error('Error', error));
     };
 
     render() {
+        // const { fetching, dog, onRequestDog, error } = this.props;
         return (
             <PlacesAutocomplete
                 value={this.state.address}
@@ -74,4 +78,17 @@ class SearchInput extends React.Component {
     }
 };
 
-export default  SearchInput;
+const mapStateToProps = state => {
+    return {
+        error: state.error
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        updateCoordinates: (cityCoords) => dispatch({ type: "UPDATE_CITY_COORDS_REQUEST", cityCoords})
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchInput);
+
