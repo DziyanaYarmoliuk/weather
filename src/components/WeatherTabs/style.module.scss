@@ -1,0 +1,32 @@
+.row {
+  display: flex;
+  justify-content: space-between;
+  &:nth-child(even){
+    background-color: #463dc521;
+  }
+
+}
+.container {
+  width: 98%;
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  border: 1px solid #3534786b;
+  border-radius: 27px;
+}
+.headerCell {
+  font-weight: bold;
+  text-align: center;
+  padding: 6px;
+  width: 5%;
+  display: flex;
+  align-items: center;
+}
+.cell {
+  text-align: center;
+  width: 5%;
+  padding: 6px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}

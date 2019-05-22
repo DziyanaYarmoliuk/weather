@@ -16,24 +16,30 @@ const searchOptions = {
 class SearchInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { address: '' };
+        this.state = {
+            address: '',
+            isAdressRight: true
+        };
     }
 
     handleChange = address => {
-        this.setState({ address });
+        this.setState({ address, isAdressRight: true });
     };
 
     handleSelect = address => {
+        this.setState({address});
         geocodeByAddress(address)
             .then(results => getLatLng(results[0]))
             .then(latLng => {
                 this.props.updateCoordinates(latLng)
             })
-            .catch(error => console.error('Error', error));
+            .catch(error => {
+                this.setState({isAdressRight: false})
+            });
     };
 
     render() {
-        // const { fetching, dog, onRequestDog, error } = this.props;
+        const { isAdressRight } = this.state
         return (
             <PlacesAutocomplete
                 value={this.state.address}
@@ -42,19 +48,20 @@ class SearchInput extends React.Component {
                 searchOptions={searchOptions}
             >
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
+                    <div className='input-container'>
                         <input
                             {...getInputProps({
                                 placeholder: 'Type your city ...',
                                 className: 'location-search-input',
                             })}
                         />
+
                         <div className="autocomplete-dropdown-container">
                             {loading && <div>Loading...</div>}
                             {suggestions.map(suggestion => {
                                 const className = suggestion.active
-                                    ? 'suggestion-item--active'
-                                    : 'suggestion-item';
+                                    ? 'dropdownItemActive'
+                                    : 'dropdownItem';
                                 // inline style for demonstration purpose
                                 const style = suggestion.active
                                     ? { backgroundColor: '#fafafa', cursor: 'pointer' }
@@ -71,7 +78,11 @@ class SearchInput extends React.Component {
                                 );
                             })}
                         </div>
+                        {!isAdressRight && (
+                            <div>Please, write real city name</div>
+                        )}
                     </div>
+
                 )}
             </PlacesAutocomplete>
         );

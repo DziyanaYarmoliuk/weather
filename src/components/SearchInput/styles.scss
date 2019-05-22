@@ -6,4 +6,35 @@
   font-size: 18px;
   color: white;
   outline: none;
+  position: relative;
+  &::placeholder {
+    color: white;
+  }
+}
+.input-container {
+  position: relative;
+}
+.autocomplete-dropdown-container {
+  position: absolute;
+  top: 59px;
+  z-index: 99999;
+  right: 0px;
+  left: 0px;
+  background: white;
+  max-height: 500px;
+  overflow-y: auto;
+  border-radius: 10px;
+  z-index: 15;
+  font-weight: 400;
+}
+
+.dropdownItem {
+  font-weight: 500;
+  color: gray;
+  padding: 10px;
+}
+.dropdownItemActive {
+  font-weight: 500;
+  color: black;
+  padding: 10px;
 }

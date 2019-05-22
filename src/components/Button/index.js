@@ -4,12 +4,16 @@ import { connect } from "react-redux";
 import styles from './style.module.scss';
 
 class Button extends Component {
+    weatherRequest = () => {
+        const { cityCoords, getCurrentWeather } = this.props;
+        getCurrentWeather(cityCoords)
+    }
     render() {
-        const { cityCoords } = this.props
+        const { cityCoords } = this.props;
         return(
             <Fragment>
                 {cityCoords && (
-                    <div className={styles.button}>Show weather</div>
+                    <div className={styles.button} onClick={this.weatherRequest}>Show weather</div>
                 )}
             </Fragment>
         )
@@ -24,8 +28,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onRequestDog: () => dispatch({ type: "API_CALL_REQUEST" }),
-        updateCoordinates: () => dispatch({ type: "UPDATE_CITY_COORDS_REQUEST"})
+        getCurrentWeather: (cityCoords) => dispatch({ type: "CURRENT_WEATHER_REQUEST", cityCoords }),
     };
 };
 

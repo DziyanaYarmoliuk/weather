@@ -1,17 +1,27 @@
 import React from 'react';
+import { connect } from "react-redux";
 
 import {
-  Header
+  Header,
+    WeatherTabs
 } from './components';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function App({currentWeather}) {
   return (
     <div className="App">
       <Header />
+        {currentWeather && (
+            <WeatherTabs />
+        )}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        currentWeather: state.currentWeather
+    };
+};
+
+export default connect(mapStateToProps, null)(App);
