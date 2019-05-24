@@ -127,11 +127,6 @@
       "<rootDir>/tests/index.spec.js"
     ]
   },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/plugin-transform-react-jsx-self": "^7.2.0",
