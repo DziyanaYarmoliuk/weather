@@ -9,7 +9,6 @@ export function* watcherSaga() {
     ])
 }
 
-
 function* updateUserCoords({cityCoords}) {
     try {
         yield put({ type: "UPDATE_CITY_COORDS_SUCCESS", cityCoords });
@@ -23,18 +22,18 @@ function currentWeatherRequest({lat, lng}) {
     const lngValue = lng.toFixed(5);
     return axios({
         method: 'GET',
-        url: `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lngValue}/lat/${latValue}/data.json`
+        url: `https://api.openweathermap.org/data/2.5/forecast?lat=${latValue}&lon=${lngValue}&APPID=f04a25e04c9805942ca14ed1c632c498`
     })
 }
 
 function* getCurrentWeather({cityCoords}) {
     try {
         const response = yield call(currentWeatherRequest ,cityCoords);
-        const currentWeather = response.data.timeSeries;
+        const currentWeather = response.data;
 
         yield put({ type: "CURRENT_WEATHER_SUCCESS", currentWeather });
     } catch (e){
-         console.log(e.message)
+        yield put({ type: "CURRENT_WEATHER_FAILURE", error: e.message });
     }
 
 }

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
 import styles from './style.module.scss';
 
@@ -7,7 +8,7 @@ class Button extends Component {
     weatherRequest = () => {
         const { cityCoords, getCurrentWeather } = this.props;
         getCurrentWeather(cityCoords)
-    }
+    };
     render() {
         const { cityCoords } = this.props;
         return(
@@ -19,6 +20,11 @@ class Button extends Component {
         )
     }
 }
+
+Button.propTypes = {
+    cityCoords: PropTypes.array.isRequired,
+    getCurrentWeather: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => {
     return {

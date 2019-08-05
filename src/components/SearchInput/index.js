@@ -4,12 +4,12 @@ import PlacesAutocomplete, {
     getLatLng,
 } from 'react-places-autocomplete';
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 
 const searchOptions = {
     types: ['(cities)'],
-    componentRestrictions: {country: 'SE'},
     language: "en"
 };
 
@@ -39,7 +39,7 @@ class SearchInput extends React.Component {
     };
 
     render() {
-        const { isAdressRight } = this.state
+        const { isAdressRight } = this.state;
         return (
             <PlacesAutocomplete
                 value={this.state.address}
@@ -87,6 +87,11 @@ class SearchInput extends React.Component {
             </PlacesAutocomplete>
         );
     }
+};
+
+SearchInput.propTypes = {
+    error: PropTypes.string.isRequired,
+    updateCoordinates: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

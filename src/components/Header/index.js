@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { SearchInput, Button } from '../';
 import styles from './style.module.scss';
 
-class Header extends Component {
+class Header extends PureComponent {
     render() {
         return(
             <section className={styles.container}>
@@ -12,7 +12,7 @@ class Header extends Component {
                 <Button />
             </section>
         )
-    }
+    };
 }
 
 export default Header;
